@@ -14,7 +14,7 @@
 		426E34EB1830D14D00FAB11E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 426E34E91830D14D00FAB11E /* InfoPlist.strings */; };
 		426E34ED1830D14D00FAB11E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E34EC1830D14D00FAB11E /* main.m */; };
 		426E34F11830D14D00FAB11E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E34F01830D14D00FAB11E /* AppDelegate.m */; };
-		426E34F41830D14D00FAB11E /* GTTableViewController.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 426E34F21830D14D00FAB11E /* GTTableViewController.xcdatamodeld */; };
+		426E34F41830D14D00FAB11E /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 426E34F21830D14D00FAB11E /* database.xcdatamodeld */; };
 		426E34F61830D14D00FAB11E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 426E34F51830D14D00FAB11E /* Images.xcassets */; };
 		426E34FD1830D14D00FAB11E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426E34FC1830D14D00FAB11E /* XCTest.framework */; };
 		426E34FE1830D14D00FAB11E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426E34DE1830D14D00FAB11E /* Foundation.framework */; };
@@ -48,7 +48,7 @@
 		426E34EE1830D14D00FAB11E /* GTTableViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GTTableViewController-Prefix.pch"; sourceTree = "<group>"; };
 		426E34EF1830D14D00FAB11E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		426E34F01830D14D00FAB11E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		426E34F31830D14D00FAB11E /* GTTableViewController.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GTTableViewController.xcdatamodel; sourceTree = "<group>"; };
+		426E34F31830D14D00FAB11E /* database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
 		426E34F51830D14D00FAB11E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		426E34FB1830D14D00FAB11E /* GTTableViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GTTableViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		426E34FC1830D14D00FAB11E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -126,7 +126,7 @@
 				426E34EF1830D14D00FAB11E /* AppDelegate.h */,
 				426E34F01830D14D00FAB11E /* AppDelegate.m */,
 				426E34F51830D14D00FAB11E /* Images.xcassets */,
-				426E34F21830D14D00FAB11E /* GTTableViewController.xcdatamodeld */,
+				426E34F21830D14D00FAB11E /* database.xcdatamodeld */,
 				426E34E71830D14D00FAB11E /* Supporting Files */,
 			);
 			path = GTTableViewController;
@@ -275,7 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				426E351D1830D7DA00FAB11E /* GTTableViewController.m in Sources */,
-				426E34F41830D14D00FAB11E /* GTTableViewController.xcdatamodeld in Sources */,
+				426E34F41830D14D00FAB11E /* database.xcdatamodeld in Sources */,
 				426E34F11830D14D00FAB11E /* AppDelegate.m in Sources */,
 				426E34ED1830D14D00FAB11E /* main.m in Sources */,
 				426E35241830D83200FAB11E /* RootViewController.m in Sources */,
@@ -495,13 +495,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		426E34F21830D14D00FAB11E /* GTTableViewController.xcdatamodeld */ = {
+		426E34F21830D14D00FAB11E /* database.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				426E34F31830D14D00FAB11E /* GTTableViewController.xcdatamodel */,
+				426E34F31830D14D00FAB11E /* database.xcdatamodel */,
 			);
-			currentVersion = 426E34F31830D14D00FAB11E /* GTTableViewController.xcdatamodel */;
-			path = GTTableViewController.xcdatamodeld;
+			currentVersion = 426E34F31830D14D00FAB11E /* database.xcdatamodel */;
+			path = database.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
