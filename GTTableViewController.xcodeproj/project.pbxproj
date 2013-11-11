@@ -22,6 +22,8 @@
 		426E35001830D14D00FAB11E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426E34E41830D14D00FAB11E /* CoreData.framework */; };
 		426E35081830D14D00FAB11E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 426E35061830D14D00FAB11E /* InfoPlist.strings */; };
 		426E350A1830D14D00FAB11E /* GTTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E35091830D14D00FAB11E /* GTTableViewControllerTests.m */; };
+		426E351D1830D7DA00FAB11E /* GTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E351C1830D7DA00FAB11E /* GTTableViewController.m */; };
+		426E35241830D83200FAB11E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E35231830D83200FAB11E /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		426E35051830D14D00FAB11E /* GTTableViewControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GTTableViewControllerTests-Info.plist"; sourceTree = "<group>"; };
 		426E35071830D14D00FAB11E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		426E35091830D14D00FAB11E /* GTTableViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTTableViewControllerTests.m; sourceTree = "<group>"; };
+		426E351B1830D7DA00FAB11E /* GTTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTTableViewController.h; path = Class/GTTableViewController.h; sourceTree = SOURCE_ROOT; };
+		426E351C1830D7DA00FAB11E /* GTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTTableViewController.m; path = Class/GTTableViewController.m; sourceTree = SOURCE_ROOT; };
+		426E35221830D83200FAB11E /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		426E35231830D83200FAB11E /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,8 @@
 		426E34E61830D14D00FAB11E /* GTTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				426E35211830D83200FAB11E /* ViewController */,
+				426E351A1830D7B900FAB11E /* Class */,
 				426E34EF1830D14D00FAB11E /* AppDelegate.h */,
 				426E34F01830D14D00FAB11E /* AppDelegate.m */,
 				426E34F51830D14D00FAB11E /* Images.xcassets */,
@@ -151,6 +159,24 @@
 				426E35061830D14D00FAB11E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		426E351A1830D7B900FAB11E /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				426E351B1830D7DA00FAB11E /* GTTableViewController.h */,
+				426E351C1830D7DA00FAB11E /* GTTableViewController.m */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		426E35211830D83200FAB11E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				426E35221830D83200FAB11E /* RootViewController.h */,
+				426E35231830D83200FAB11E /* RootViewController.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,9 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				426E351D1830D7DA00FAB11E /* GTTableViewController.m in Sources */,
 				426E34F41830D14D00FAB11E /* GTTableViewController.xcdatamodeld in Sources */,
 				426E34F11830D14D00FAB11E /* AppDelegate.m in Sources */,
 				426E34ED1830D14D00FAB11E /* main.m in Sources */,
+				426E35241830D83200FAB11E /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +481,7 @@
 				426E350F1830D14D00FAB11E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		426E35101830D14D00FAB11E /* Build configuration list for PBXNativeTarget "GTTableViewControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -461,6 +490,7 @@
 				426E35121830D14D00FAB11E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
