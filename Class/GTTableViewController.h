@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GTTableViewController : UITableViewController
+@interface GTTableViewController : UIViewController <NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, retain) UITableView *tableView;
+
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+
+- (NSManagedObjectContext *)managedObjectContext;
 
 @end
