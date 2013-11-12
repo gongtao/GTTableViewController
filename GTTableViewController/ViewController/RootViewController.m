@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "Player.h"
 
 @interface RootViewController ()
 
@@ -33,6 +34,42 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    id appDelegate = [UIApplication sharedApplication].delegate;
+    return [appDelegate managedObjectContext];
+}
+
+- (NSFetchRequest *)fetchRequest
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *playerEntity = [NSEntityDescription entityForName:@"Player" inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:playerEntity];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"age" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"team == %@", self.team];
+    //    [fetchRequest setPredicate:predicate];
+    [fetchRequest setFetchLimit:20];
+    return fetchRequest;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    Player *player = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = player.name;
+    
+    return cell;
 }
 
 @end

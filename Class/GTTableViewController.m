@@ -7,7 +7,6 @@
 //
 
 #import "GTTableViewController.h"
-#import "Player.h"
 
 @interface GTTableViewController ()
 
@@ -48,11 +47,41 @@
     self.fetchedResultsController = nil;
 }
 
+#pragma mark - Override method
+
 - (NSManagedObjectContext *)managedObjectContext
 {
+    if ([self.delegate respondsToSelector:@selector(managedObjectContextGTTableViewController:)]) {
+        return [self.delegate managedObjectContextGTTableViewController:self];
+    }
     id appDelegate = [UIApplication sharedApplication].delegate;
     return [appDelegate managedObjectContext];
 }
+
+- (NSFetchRequest *)fetchRequest
+{
+    if ([self.delegate respondsToSelector:@selector(fetchRequestGTTableViewController:)]) {
+        return [self.delegate fetchRequestGTTableViewController:self];
+    }
+    return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
+{
+    if ([self.delegate respondsToSelector:@selector(viewController:cellForRowAtIndexPath:fetchedResultsController:)]) {
+        return [self.delegate viewController:self cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
+    }
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    return cell;
+}
+
+#pragma mark - Property method
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -60,18 +89,7 @@
         return _fetchedResultsController;
     }
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *playerEntity = [NSEntityDescription entityForName:@"Player" inManagedObjectContext:[self managedObjectContext]];
-    [fetchRequest setEntity:playerEntity];
-    
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-    
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"team == %@", self.team];
-//    [fetchRequest setPredicate:predicate];
-    [fetchRequest setFetchLimit:5];
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"Players"];
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"DataCache"];
     _fetchedResultsController.delegate = self;
     
     NSError *error = NULL;
@@ -119,17 +137,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    Player *player = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = player.name;
-    
-    return cell;
+    return [self tableView:tableView cellForRowAtIndexPath:indexPath fetchedResultsController:self.fetchedResultsController];
 }
 
 /*
@@ -169,18 +177,6 @@
  // Return NO if you do not want the item to be re-orderable.
  return YES;
  }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a story board-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- 
  */
 
 @end
