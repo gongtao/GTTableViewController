@@ -1,13 +1,13 @@
 ## GTTableViewController
 
-GTTableViewController is a light weight subclass of UIViewController that integrates NSFetchedResultsController and UITableView to display data of CoreData.
+GTTableViewController is a light weight subclass of `UIViewController` that integrates `NSFetchedResultsController` and `UITableView` to display data of CoreData.
 It has a good scalability, and can be integrated to your project either by inheritance or as a child viewController using datasource methods.
-To display the data in UITableView, all you need to do is to customize your own NSFetchRequest and UITableViewCell objects.
+To display the data in UITableView, all you need to do is to customize your own `NSFetchRequest` and `UITableViewCell` objects.
 
 ## How to get started?
 
 - [Download GTTableViewController](https://github.com/gongtao/GTTableViewController/archive/master.zip) and add files under the Class folder into your project.
-- There are two ways to use:  inheritance and GTTableViewControllerDelegate.
+- There are two ways to use:  inheritance and GTTableViewControllerDataSource.
 
 ### Inheritance
 
@@ -15,7 +15,7 @@ Write a GTTableViewController subclass and override its methods like this:
 
 #### NSManagedObjectContext
 
-Return NSManagedObjectContext object which CoreData context you want to use. Default returns from AppDelegate, If you do not override it.
+Return `NSManagedObjectContext` object which CoreData context you want to use. Default returns from AppDelegate, If you do not override it.
 
 ```objective-c
 - (NSManagedObjectContext *)managedObjectContext
@@ -27,7 +27,7 @@ Return NSManagedObjectContext object which CoreData context you want to use. Def
 
 #### NSFetchRequest
 
-Retrun NSFetchRequest object include the fetch rules and orders. This method must be overrided.
+Retrun `NSFetchRequest` object include the fetch rules and orders. This method must be overrided.
 
 ```objective-c
 - (NSFetchRequest *)fetchRequest
@@ -45,7 +45,7 @@ Retrun NSFetchRequest object include the fetch rules and orders. This method mus
 
 #### UITableViewCell Display
 
-Config your own UITableViewCell. Cell is empty, if you do not override it.
+Config your own `UITableViewCell`. Cell is empty, if you do not override it.
 
 ```objective-c
 - (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
@@ -57,7 +57,7 @@ Config your own UITableViewCell. Cell is empty, if you do not override it.
 
 #### UITableViewCell
 
-Return your own UITableViewCell. Cell is UITableViewCellStyleDefault, if you do not override it.
+Return your own `UITableViewCell`. Cell is `UITableViewCellStyleDefault`, if you do not override it.
 
 ```objective-c
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
@@ -75,9 +75,9 @@ Return your own UITableViewCell. Cell is UITableViewCellStyleDefault, if you do 
 }
 ```
 
-### GTTableViewControllerDelegate
+### GTTableViewControllerDataSource
 
-Delegate is almost like Inheritance way. This way is used for integrating it as a subview or a child viewController.
+DataSource is almost like Inheritance way. This way is used for integrating it as a subview or a child viewController.
 
 #### NSManagedObjectContext
 
@@ -121,6 +121,6 @@ This property controls the max number of displayed fetched objects in UITableVie
 
 ## Contact
 
-龚涛   Gong Tao   mail: gongtaoatbupt@gmail.com
+龚涛    Gong Tao    mail: gongtaoatbupt@gmail.com
 
 
