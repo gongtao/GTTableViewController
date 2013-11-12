@@ -8,7 +8,7 @@
 
 #import "GTTableViewController.h"
 
-@interface GTTableViewController ()
+@interface GTTableViewController (Private)
 
 @end
 
@@ -27,12 +27,14 @@
 {
     [super viewDidLoad];
     
+    _numberOfFetchLimit = 50;
+    
+    _rowAnimation = UITableViewRowAnimationFade;
+    
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    
-    [self fetchedResultsController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +47,22 @@
 {
     self.fetchedResultsController.delegate = nil;
     self.fetchedResultsController = nil;
+}
+
+#pragma mark - public method
+
+- (void)performFetch
+{
+    if (!_fetchedResultsController) {
+        [self fetchedResultsController];
+        return;
+    }
+    
+    NSError *error = NULL;
+    if (![_fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
 }
 
 #pragma mark - Override method
@@ -63,10 +81,24 @@
     return [self.delegate fetchRequestGTTableViewController:self];
 }
 
+- (NSString *)sectionNameKeyPath
+{
+    return [self.delegate sectionNameKeyPathGTTableViewController:self];
+}
+
+- (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
+{
+    if ([self.delegate respondsToSelector:@selector(configCell:viewController:fetchedResultsController:)]) {
+        [self.delegate configCell:cell viewController:self fetchedResultsController:fetchedResultsController];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 {
     if ([self.delegate respondsToSelector:@selector(viewController:cellForRowAtIndexPath:fetchedResultsController:)]) {
-        return [self.delegate viewController:self cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
+        UITableViewCell *cell = [self.delegate viewController:self cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
+        [self configCell:cell cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
+        return cell;
     }
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -74,6 +106,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    [self configCell:cell cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
     
     return cell;
 }
@@ -86,16 +120,23 @@
         return _fetchedResultsController;
     }
     
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"DataCache"];
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:[self managedObjectContext] sectionNameKeyPath:[self sectionNameKeyPath] cacheName:@"DataCache"];
     _fetchedResultsController.delegate = self;
     
-    NSError *error = NULL;
-    if (![_fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    [self performFetch];
     
     return _fetchedResultsController;
+}
+
+- (void)setNumberOfFetchLimit:(int)numberOfFetchLimit
+{
+    if (_numberOfFetchLimit != numberOfFetchLimit) {
+        if (numberOfFetchLimit < 0) {
+            numberOfFetchLimit = 0;
+        }
+        _numberOfFetchLimit = numberOfFetchLimit;
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -107,12 +148,41 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:_rowAnimation];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configCell:[self.tableView cellForRowAtIndexPath:indexPath] cellForRowAtIndexPath:indexPath fetchedResultsController:self.fetchedResultsController];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths:[NSArray
+                                                    arrayWithObject:indexPath] withRowAnimation:_rowAnimation];
+            [self.tableView insertRowsAtIndexPaths:[NSArray
+                                                    arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
+            break;
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:_rowAnimation];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:_rowAnimation];
+            break;
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
@@ -129,7 +199,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[self.fetchedResultsController sections] objectAtIndex:section] numberOfObjects];
+    NSUInteger number = [[[self.fetchedResultsController sections] objectAtIndex:section] numberOfObjects];
+    if (number > _numberOfFetchLimit) {
+        number = _numberOfFetchLimit;
+    }
+    return number;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

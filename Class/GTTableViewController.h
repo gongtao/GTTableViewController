@@ -16,7 +16,16 @@
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
+/* The max allowed number of displayed objects.
+ Change its value to add or reduce the displayed objects.
+ */
+@property (nonatomic, assign) int numberOfFetchLimit;
+
+@property (nonatomic, assign) UITableViewRowAnimation rowAnimation;
+
 @property (nonatomic, assign) id<GTTableViewControllerDelegate> delegate;
+
+- (void)performFetch;
 
 /* The context that GTTableViewController uses.
  Overrides this function to make GTTableViewController use your own NSManagedObjectContext object.
@@ -28,12 +37,23 @@
  */
 - (NSFetchRequest *)fetchRequest;
 
+/* The sectionNameKeyPath that GTTableViewController uses.
+ Overrides this function to make GTTableViewController group objects by your own way.
+ */
+- (NSString *)sectionNameKeyPath;
+
+/* Config UITableView cells.
+ Overrides this function to change cell's data.
+ */
+- (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
+
 /* Returns cells that GTTableViewController uses.
  Overrides this function to make GTTableViewController use your own cells.
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
 
 @end
+
 
 @protocol GTTableViewControllerDelegate <NSObject>
 
@@ -43,7 +63,11 @@
 
 @optional
 
+- (NSString *)sectionNameKeyPathGTTableViewController:(GTTableViewController *)viewController;
+
 - (NSManagedObjectContext *)managedObjectContextGTTableViewController:(GTTableViewController *)viewController;
+
+- (void)configCell:(UITableViewCell *)cell viewController:(GTTableViewController *)viewController fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
 
 - (UITableViewCell *)viewController:(GTTableViewController *)viewController cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
 
