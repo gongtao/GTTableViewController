@@ -18,12 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //    for (int i = 0; i < 20; i++) {
-    //        Player *player = [NSEntityDescription insertNewObjectForEntityForName:@"Player" inManagedObjectContext:[self managedObjectContext]];
-    //        player.name = [NSString stringWithFormat:@"player%i", i];
-    //        player.age = [NSNumber numberWithInt:i];
-    //    }
-    //    [self saveContext];
+//    for (int i = 0; i < 20; i++) {
+//        Player *player = [NSEntityDescription insertNewObjectForEntityForName:@"Player" inManagedObjectContext:[self managedObjectContext]];
+//        player.name = [NSString stringWithFormat:@"player%i", i];
+//        player.age = [NSNumber numberWithInt:i];
+//    }
+//    [self saveContext];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     RootViewController *rootViewController = [[RootViewController alloc] init];

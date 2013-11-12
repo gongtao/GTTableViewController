@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    _numberOfFetchLimit = 50;
+    _numberOfFetchLimit = 10;
     
     _rowAnimation = UITableViewRowAnimationFade;
     
@@ -69,8 +69,8 @@
 
 - (NSManagedObjectContext *)managedObjectContext
 {
-    if ([self.delegate respondsToSelector:@selector(managedObjectContextGTTableViewController:)]) {
-        return [self.delegate managedObjectContextGTTableViewController:self];
+    if ([self.dataSource respondsToSelector:@selector(managedObjectContextGTTableViewController:)]) {
+        return [self.dataSource managedObjectContextGTTableViewController:self];
     }
     id appDelegate = [UIApplication sharedApplication].delegate;
     return [appDelegate managedObjectContext];
@@ -78,25 +78,25 @@
 
 - (NSFetchRequest *)fetchRequest
 {
-    return [self.delegate fetchRequestGTTableViewController:self];
+    return [self.dataSource fetchRequestGTTableViewController:self];
 }
 
 - (NSString *)sectionNameKeyPath
 {
-    return [self.delegate sectionNameKeyPathGTTableViewController:self];
+    return [self.dataSource sectionNameKeyPathGTTableViewController:self];
 }
 
 - (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 {
-    if ([self.delegate respondsToSelector:@selector(configCell:viewController:fetchedResultsController:)]) {
-        [self.delegate configCell:cell viewController:self fetchedResultsController:fetchedResultsController];
+    if ([self.dataSource respondsToSelector:@selector(configCell:viewController:fetchedResultsController:)]) {
+        [self.dataSource configCell:cell viewController:self fetchedResultsController:fetchedResultsController];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 {
-    if ([self.delegate respondsToSelector:@selector(viewController:cellForRowAtIndexPath:fetchedResultsController:)]) {
-        UITableViewCell *cell = [self.delegate viewController:self cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
+    if ([self.dataSource respondsToSelector:@selector(viewController:cellForRowAtIndexPath:fetchedResultsController:)]) {
+        UITableViewCell *cell = [self.dataSource viewController:self cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
         [self configCell:cell cellForRowAtIndexPath:indexPath fetchedResultsController:fetchedResultsController];
         return cell;
     }
@@ -148,14 +148,38 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+    int number = [[[controller sections] objectAtIndex:[indexPath section]] numberOfObjects];
+    
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
+            if (_numberOfFetchLimit <= number) {
+                if ([newIndexPath row] < _numberOfFetchLimit - 1) {
+                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
+                    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_numberOfFetchLimit-1 inSection:[newIndexPath section]]] withRowAnimation:_rowAnimation];
+                }
+                else if ([newIndexPath row] + 1 == _numberOfFetchLimit) {
+                    [self configCell:[self.tableView cellForRowAtIndexPath:newIndexPath] cellForRowAtIndexPath:newIndexPath fetchedResultsController:self.fetchedResultsController];
+                }
+            }
+            else {
+                [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
+            }
             break;
             
         case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:_rowAnimation];
+            if (_numberOfFetchLimit <= number) {
+                if ([newIndexPath row] < _numberOfFetchLimit - 1) {
+                    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:_rowAnimation];
+                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_numberOfFetchLimit-1 inSection:[indexPath section]]] withRowAnimation:_rowAnimation];
+                }
+                else if ([newIndexPath row] + 1 == _numberOfFetchLimit) {
+                    [self configCell:[self.tableView cellForRowAtIndexPath:indexPath] cellForRowAtIndexPath:indexPath fetchedResultsController:self.fetchedResultsController];
+                }
+            }
+            else {
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:_rowAnimation];
+            }
             break;
             
         case NSFetchedResultsChangeUpdate:

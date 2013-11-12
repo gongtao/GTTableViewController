@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol GTTableViewControllerDelegate;
+@protocol GTTableViewControllerDataSource;
 
 @interface GTTableViewController : UIViewController <NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -23,7 +23,7 @@
 
 @property (nonatomic, assign) UITableViewRowAnimation rowAnimation;
 
-@property (nonatomic, assign) id<GTTableViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<GTTableViewControllerDataSource> dataSource;
 
 - (void)performFetch;
 
@@ -55,7 +55,7 @@
 @end
 
 
-@protocol GTTableViewControllerDelegate <NSObject>
+@protocol GTTableViewControllerDataSource <NSObject>
 
 @required
 
