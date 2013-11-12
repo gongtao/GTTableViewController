@@ -60,10 +60,7 @@
 
 - (NSFetchRequest *)fetchRequest
 {
-    if ([self.delegate respondsToSelector:@selector(fetchRequestGTTableViewController:)]) {
-        return [self.delegate fetchRequestGTTableViewController:self];
-    }
-    return nil;
+    return [self.delegate fetchRequestGTTableViewController:self];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
