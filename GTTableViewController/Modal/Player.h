@@ -2,8 +2,8 @@
 //  Player.h
 //  GTTableViewController
 //
-//  Created by 龚 涛 on 13-11-11.
-//  Copyright (c) 2013年 龚涛. All rights reserved.
+//  Created by 龚涛 on 11/12/13.
+//  Copyright (c) 2013 龚涛. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,5 +13,6 @@
 @interface Player : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * age;
 
 @end
