@@ -79,6 +79,17 @@ Return your own `UITableViewCell`. Cell is `UITableViewCellStyleDefault`, if you
 
 DataSource is almost like Inheritance way. This way is used for integrating it as a subview or a child viewController.
 
+#### Init
+
+In `UIViewController` object, write code like: 
+
+```objective-c
+GTTableViewController *viewController = [[GTTableViewController alloc] init];
+viewController.dataSource = self;
+[self addChildViewController:viewController];
+[self.view addSubview:viewController.view];
+```
+
 #### NSManagedObjectContext
 
 ```objective-c
@@ -102,7 +113,7 @@ This method is requeired.
 #### UITableViewCell
 
 ```objective-c
-- (UITableViewCell *)viewController:(GTTableViewController *)viewController cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
+- (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath viewController:(GTTableViewController *)viewController fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 ```
 
 ## Other useful infomation
