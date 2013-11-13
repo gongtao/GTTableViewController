@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    _numberOfFetchLimit = 10;
+    _numberOfFetchLimit = 5;
     
     _rowAnimation = UITableViewRowAnimationFade;
     
@@ -83,13 +83,16 @@
 
 - (NSString *)sectionNameKeyPath
 {
-    return [self.dataSource sectionNameKeyPathGTTableViewController:self];
+    if ([self.dataSource respondsToSelector:@selector(sectionNameKeyPath)]) {
+        return [self.dataSource sectionNameKeyPathGTTableViewController:self];
+    }
+    return nil;
 }
 
 - (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController
 {
-    if ([self.dataSource respondsToSelector:@selector(configCell:viewController:fetchedResultsController:)]) {
-        [self.dataSource configCell:cell viewController:self fetchedResultsController:fetchedResultsController];
+    if ([self.dataSource respondsToSelector:@selector(configCell:cellForRowAtIndexPath:viewController:fetchedResultsController:)]) {
+        [self.dataSource configCell:cell cellForRowAtIndexPath:indexPath viewController:self fetchedResultsController:fetchedResultsController];
     }
 }
 

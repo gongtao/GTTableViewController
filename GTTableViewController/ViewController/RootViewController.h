@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 龚涛. All rights reserved.
 //
 
-#import "GTTableViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface RootViewController : GTTableViewController
+@interface RootViewController : UIViewController
 
 @end

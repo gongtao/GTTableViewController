@@ -67,7 +67,7 @@
 
 - (NSManagedObjectContext *)managedObjectContextGTTableViewController:(GTTableViewController *)viewController;
 
-- (void)configCell:(UITableViewCell *)cell viewController:(GTTableViewController *)viewController fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
+- (void)configCell:(UITableViewCell *)cell cellForRowAtIndexPath:(NSIndexPath *)indexPath viewController:(GTTableViewController *)viewController fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
 
 - (UITableViewCell *)viewController:(GTTableViewController *)viewController cellForRowAtIndexPath:(NSIndexPath *)indexPath fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController;
 

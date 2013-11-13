@@ -25,6 +25,8 @@
 		426E350A1830D14D00FAB11E /* GTTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E35091830D14D00FAB11E /* GTTableViewControllerTests.m */; };
 		426E351D1830D7DA00FAB11E /* GTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E351C1830D7DA00FAB11E /* GTTableViewController.m */; };
 		426E35241830D83200FAB11E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 426E35231830D83200FAB11E /* RootViewController.m */; };
+		42EBCD4418330C6D00278AEF /* NormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EBCD4318330C6D00278AEF /* NormalViewController.m */; };
+		42EBCD4A18330CD600278AEF /* DataSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EBCD4918330CD600278AEF /* DataSourceViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,10 @@
 		426E351C1830D7DA00FAB11E /* GTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTTableViewController.m; path = Class/GTTableViewController.m; sourceTree = SOURCE_ROOT; };
 		426E35221830D83200FAB11E /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		426E35231830D83200FAB11E /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		42EBCD4218330C6D00278AEF /* NormalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalViewController.h; sourceTree = "<group>"; };
+		42EBCD4318330C6D00278AEF /* NormalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalViewController.m; sourceTree = "<group>"; };
+		42EBCD4818330CD600278AEF /* DataSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceViewController.h; sourceTree = "<group>"; };
+		42EBCD4918330CD600278AEF /* DataSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +185,10 @@
 			children = (
 				426E35221830D83200FAB11E /* RootViewController.h */,
 				426E35231830D83200FAB11E /* RootViewController.m */,
+				42EBCD4218330C6D00278AEF /* NormalViewController.h */,
+				42EBCD4318330C6D00278AEF /* NormalViewController.m */,
+				42EBCD4818330CD600278AEF /* DataSourceViewController.h */,
+				42EBCD4918330CD600278AEF /* DataSourceViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -293,6 +303,8 @@
 				426E34ED1830D14D00FAB11E /* main.m in Sources */,
 				420A03581831BF580046FF39 /* Player.m in Sources */,
 				426E35241830D83200FAB11E /* RootViewController.m in Sources */,
+				42EBCD4418330C6D00278AEF /* NormalViewController.m in Sources */,
+				42EBCD4A18330CD600278AEF /* DataSourceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
