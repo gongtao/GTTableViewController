@@ -44,7 +44,7 @@
 - (void)add
 {
     //    int num = [[self.fetchedResultsController.sections objectAtIndex:0] numberOfObjects];
-    int num = 0;
+    int num = 4;
     Player *player = [NSEntityDescription insertNewObjectForEntityForName:@"Player" inManagedObjectContext:[self managedObjectContext]];
     player.name = [NSString stringWithFormat:@"player%i", num];
     player.age = [NSNumber numberWithInt:num];
@@ -67,7 +67,7 @@
     NSEntityDescription *playerEntity = [NSEntityDescription entityForName:@"Player" inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:playerEntity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"player0"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", @"player4"];
     [fetchRequest setPredicate:predicate];
     NSError *error;
     NSArray *results = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];

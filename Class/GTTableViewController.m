@@ -157,12 +157,9 @@
             
         case NSFetchedResultsChangeInsert:
             if (_numberOfFetchLimit <= number) {
-                if ([newIndexPath row] < _numberOfFetchLimit - 1) {
-                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
+                if ([newIndexPath row] < _numberOfFetchLimit) {
                     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_numberOfFetchLimit-1 inSection:[newIndexPath section]]] withRowAnimation:_rowAnimation];
-                }
-                else if ([newIndexPath row] + 1 == _numberOfFetchLimit) {
-                    [self configCell:[self.tableView cellForRowAtIndexPath:newIndexPath] cellForRowAtIndexPath:newIndexPath fetchedResultsController:self.fetchedResultsController];
+                    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:_rowAnimation];
                 }
             }
             else {
@@ -172,12 +169,9 @@
             
         case NSFetchedResultsChangeDelete:
             if (_numberOfFetchLimit <= number) {
-                if ([newIndexPath row] < _numberOfFetchLimit - 1) {
+                if ([indexPath row] < _numberOfFetchLimit) {
                     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:_rowAnimation];
                     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_numberOfFetchLimit-1 inSection:[indexPath section]]] withRowAnimation:_rowAnimation];
-                }
-                else if ([newIndexPath row] + 1 == _numberOfFetchLimit) {
-                    [self configCell:[self.tableView cellForRowAtIndexPath:indexPath] cellForRowAtIndexPath:indexPath fetchedResultsController:self.fetchedResultsController];
                 }
             }
             else {
