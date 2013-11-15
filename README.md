@@ -7,6 +7,7 @@ To display the data in UITableView, all you need to do is to customize your own 
 ## How to get started?
 
 - [Download GTTableViewController](https://github.com/gongtao/GTTableViewController/archive/master.zip) and add files under the Class folder into your project.
+- Installation with CocoaPods. [CocoaPods](http://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like AFNetworking in your projects. See the ["Getting Started" guide for more information](https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking).
 - There are two ways to use:  inheritance and GTTableViewControllerDataSource.
 
 ### Inheritance
