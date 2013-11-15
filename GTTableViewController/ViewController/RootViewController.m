@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "NormalViewController.h"
 #import "DataSourceViewController.h"
+#import "PageViewController.h"
 
 @interface RootViewController ()
 
@@ -31,22 +32,35 @@
     
     self.title = @"Home";
     
+    CGPoint center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-50);
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setTitle:@"Inheritance" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.frame = CGRectMake(0.0, 0.0, 100.0, 40.0);
-    button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2-50);
+    button.center = center;
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     button.tag = 0;
     [self.view addSubview:button];
     
+    center.y += 100;
     button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setTitle:@"DataSource" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.frame = CGRectMake(0.0, 0.0, 100.0, 40.0);
-    button.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2+50);
+    button.center = center;
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     button.tag = 1;
+    [self.view addSubview:button];
+    
+    center.y += 100;
+    button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setTitle:@"Page" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0.0, 0.0, 100.0, 40.0);
+    button.center = center;
+    [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    button.tag = 2;
     [self.view addSubview:button];
 }
 
@@ -65,6 +79,10 @@
         }
         case 1:{
             [self.navigationController pushViewController:[[DataSourceViewController alloc] init] animated:YES];
+            break;
+        }
+        case 2:{
+            [self.navigationController pushViewController:[[PageViewController alloc] init] animated:YES];
             break;
         }
         default:
