@@ -4,3 +4,9 @@ xcuserdata
 *.xcuserstate
 
 *.xcuserstate
+
+GTTableViewController.xcworkspace
+
+Pods
+
+Podfile.lock
