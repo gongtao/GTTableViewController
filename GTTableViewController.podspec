@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   
   s.platform     = :ios, '5.0'
 
-  s.source       = { :git => "https://github.com/gongtao/GTTableViewController.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/gongtao/GTTableViewController.git", :commit => "ba42bfa1d696f961e365a3ecea4265bff355fc5d" }
 
   s.source_files  = 'Class/*.{h,m}'
 
