@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
 
   s.source_files  = 'Class/*.{h,m}'
 
-  s.framework  = 'SystemConfiguration', 'CoreData'
+  s.framework  = 'CoreData'
 
   s.requires_arc = true
 
