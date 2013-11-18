@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author       = { "gongtao" => "email@address.com" }
   s.platform     = :ios, '5.0'
 
-  s.source       = { :git => "https://github.com/gongtao/GTTableViewController.git", :commit => "b5dc6592da7147fdf4c7fe1a3c84dede80cee624" }
+  s.source       = { :git => "https://github.com/gongtao/GTTableViewController.git", :commit => "6cf84e2ef2272037d1c5e34afd6662dedf43e6af" }
 
   s.source_files  = 'Class/*.{h,m}'
 
