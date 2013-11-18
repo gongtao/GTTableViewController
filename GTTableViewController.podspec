@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
 
   s.source_files  = 'Class/*.{h,m}'
 
-  s.framework  = 'CoreData'
+  s.framework  = 'CoreData', 'UIKit'
 
 end
