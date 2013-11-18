@@ -11,10 +11,12 @@ Pod::Spec.new do |s|
   
   s.platform     = :ios, '5.0'
 
-  s.source       = { :git => "https://github.com/gongtao/GTTableViewController.git", :commit => "debc887be97f1e672f1af60376c76366a5667e22" }
+  s.source       = { :git => "https://github.com/gongtao/GTTableViewController.git", :commit => "e7dc5f1cd4c7a4ca71c88cc970988fd9e6cb3ade", :tag => "1.0.0" }
 
   s.source_files  = 'Class/*.{h,m}'
 
   s.framework  = 'CoreData', 'UIKit'
+
+  s.requires_arc = true
 
 end
