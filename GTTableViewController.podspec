@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/gongtao/GTTableViewController"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
-  s.author       = { "gongtao" => "email@address.com" }
+  s.author       = { "gongtao" => "gongtao@jike.com" }
   
   s.platform     = :ios, '5.0'
 
