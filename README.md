@@ -119,6 +119,12 @@ This method is requeired.
 
 ## Other useful infomation
 
+Write your code in block function to change request that GTTableViewController uses. When the request is changed, the presentation of data may be also changed.
+
+```objective-c
+- (void)changeFetchRequest:(void (^)(NSFetchRequest *request))block
+```
+
 Fetch objects method
 
 ```objective-c
