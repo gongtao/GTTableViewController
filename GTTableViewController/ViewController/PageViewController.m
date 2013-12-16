@@ -28,6 +28,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    if (!IS_IO7) {
+        CGRect frame = self.view.bounds;
+        frame.size.height -= 44.0;
+        self.tableView.frame = frame;
+    }
+    
+    self.numberOfFetchLimit = 5;
     
     self.title = @"Page Test";
     

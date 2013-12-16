@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    _numberOfFetchLimit = 5;
+    _numberOfFetchLimit = NSUIntegerMax;
     
     _rowAnimation = UITableViewRowAnimationFade;
     
@@ -51,6 +51,13 @@
 
 #pragma mark - public method
 
+- (void)changeFetchRequest:(void (^)(NSFetchRequest *request))block
+{
+    [NSFetchedResultsController deleteCacheWithName:[self cacheName]];
+    block(self.fetchedResultsController.fetchRequest);
+    [self performFetch];
+}
+
 - (void)performFetch
 {
     if (!_fetchedResultsController) {
@@ -66,6 +73,14 @@
 }
 
 #pragma mark - Override method
+
+- (NSString *)cacheName
+{
+    if ([self.dataSource respondsToSelector:@selector(cacheNameGTTableViewController:)]) {
+        return [self.dataSource cacheNameGTTableViewController:self];
+    }
+    return @"CacheData";
+}
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -123,7 +138,7 @@
         return _fetchedResultsController;
     }
     
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:[self managedObjectContext] sectionNameKeyPath:[self sectionNameKeyPath] cacheName:@"DataCache"];
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:[self managedObjectContext] sectionNameKeyPath:[self sectionNameKeyPath] cacheName:[self cacheName]];
     _fetchedResultsController.delegate = self;
     
     [self performFetch];
@@ -131,12 +146,9 @@
     return _fetchedResultsController;
 }
 
-- (void)setNumberOfFetchLimit:(int)numberOfFetchLimit
+- (void)setNumberOfFetchLimit:(NSUInteger)numberOfFetchLimit
 {
     if (_numberOfFetchLimit != numberOfFetchLimit) {
-        if (numberOfFetchLimit < 0) {
-            numberOfFetchLimit = 0;
-        }
         _numberOfFetchLimit = numberOfFetchLimit;
         [self.tableView reloadData];
     }
@@ -231,44 +243,5 @@
 {
     return [self tableView:tableView cellForRowAtIndexPath:indexPath fetchedResultsController:self.fetchedResultsController];
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 @end

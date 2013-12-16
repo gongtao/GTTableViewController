@@ -38,6 +38,13 @@
     _viewController.dataSource = self;
     [self addChildViewController:_viewController];
     [self.view addSubview:_viewController.view];
+    
+    if (!IS_IO7) {
+        CGRect frame = _viewController.view.bounds;
+        frame.origin.y = -20.0;
+        frame.size.height -= 44.0;
+        _viewController.tableView.frame = frame;
+    }
 }
 
 - (void)didReceiveMemoryWarning

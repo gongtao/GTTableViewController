@@ -20,13 +20,23 @@
 /* The max allowed number of displayed objects.
  Change its value to add or reduce the displayed objects.
  */
-@property (nonatomic, assign) int numberOfFetchLimit;
+@property (nonatomic, assign) NSUInteger numberOfFetchLimit;
 
 @property (nonatomic, assign) UITableViewRowAnimation rowAnimation;
 
 @property (nonatomic, assign) id<GTTableViewControllerDataSource> dataSource;
 
+/* Write your code in block function to change request that GTTableViewController uses.
+ When the request is changed, the presentation of data may be also changed.
+ */
+- (void)changeFetchRequest:(void (^)(NSFetchRequest *request))block;
+
 - (void)performFetch;
+
+/* The cache name that NSFetchedResultsController uses.
+ Overrides this function to make GTTableViewController use your own cache name.
+ */
+- (NSString *)cacheName;
 
 /* The context that GTTableViewController uses.
  Overrides this function to make GTTableViewController use your own NSManagedObjectContext object.
@@ -63,6 +73,8 @@
 - (NSFetchRequest *)fetchRequestGTTableViewController:(GTTableViewController *)viewController;
 
 @optional
+
+- (NSString *)cacheNameGTTableViewController:(GTTableViewController *)viewController;
 
 - (NSString *)sectionNameKeyPathGTTableViewController:(GTTableViewController *)viewController;
 

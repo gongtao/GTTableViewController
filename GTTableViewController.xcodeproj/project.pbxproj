@@ -67,6 +67,7 @@
 		426E351C1830D7DA00FAB11E /* GTTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTTableViewController.m; path = Class/GTTableViewController.m; sourceTree = SOURCE_ROOT; };
 		426E35221830D83200FAB11E /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		426E35231830D83200FAB11E /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		428BB255185EDE6B00BC12C4 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		42911C791835C1F3005DF97D /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		42911C7A1835C1F3005DF97D /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		42911C881835FE39005DF97D /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 				426E351A1830D7B900FAB11E /* Class */,
 				426E34EF1830D14D00FAB11E /* AppDelegate.h */,
 				426E34F01830D14D00FAB11E /* AppDelegate.m */,
+				428BB255185EDE6B00BC12C4 /* Constant.h */,
 				426E34F51830D14D00FAB11E /* Images.xcassets */,
 				426E34F21830D14D00FAB11E /* database.xcdatamodeld */,
 				426E34E71830D14D00FAB11E /* Supporting Files */,
